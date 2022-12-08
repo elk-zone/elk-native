@@ -1,0 +1,74 @@
+{
+  "build": {
+    "beforeBuildCommand": "cd elk && npm run build",
+    "beforeDevCommand": "cd elk && npm run dev",
+    "devPath": "http://localhost:5314",
+    "distDir": "../elk/.output/public"
+  },
+  "package": {
+    "productName": "elk",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false
+    },
+    "bundle": {
+      "active": true,
+      "category": "SocialNetworking",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons-dev/32x32.png",
+        "icons-dev/128x128.png",
+        "icons-dev/128x128@2x.png",
+        "icons-dev/icon.icns",
+        "icons-dev/icon.ico"
+      ],
+      "identifier": "zone.elk.desktop",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": ["app", "msi", "appimage"],
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": {
+        "default-src": "'none'",
+        "style-src": "'self'",
+        "img-src": "'self' data: https:",
+        "media-src": "https:",
+        "font-src": "https://fonts.gstatic.com",
+        "connect-src": "https: wss:"
+      }
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "Elk",
+        "width": 800,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ]
+  }
+}
