@@ -26,7 +26,7 @@ We're really excited that you're interested in contributing to Elk! Please read 
 
 ## Local Setup
 
-First you will need to install the frontend dependencies:
+First you will need to install Rust and other system dependencies required for developing a Tauri app, you can follow [this guide](https://tauri.app/v1/guides/getting-started/prerequisites). Then install the frontend dependencies:
 
 ```
 cd elk
