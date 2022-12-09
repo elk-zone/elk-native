@@ -41,12 +41,14 @@ jobs:
         run: |
           mkdir elk/.output/public
       - uses: actions-rs/clippy-check@v1
+        working-directory: ./src-tauri
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --manifest-path=Cargo.toml --all-targets --all-features -- -D warnings
           name: clippy
 
       - uses: actions-rs/cargo@v1
+        working-directory: ./src-tauri
         with:
           command: fmt
           args: --manifest-path=Cargo.toml --all -- --check
