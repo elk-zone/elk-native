@@ -23,9 +23,6 @@ jobs:
     runs-on: macos-latest
     strategy:
       fail-fast: false
-    defaults:
-      run:
-        working-directory: ./src-tauri
 
     steps:
       - uses: actions/checkout@v3

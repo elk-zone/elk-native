@@ -26,9 +26,6 @@ concurrency:
 jobs:
   audit-rust:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src-tauri
     steps:
       - uses: actions/checkout@v3
 
