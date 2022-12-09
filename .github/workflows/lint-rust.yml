@@ -1,0 +1,52 @@
+name: Lint Rust
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/clippy.yml'
+      - 'src-tauri/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/clippy.yml'
+      - 'src-tauri/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-rust:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install clippy with stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: clippy, rustfmt
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Mock Files
+        run: |
+          mkdir build
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --manifest-path=Cargo.toml --all-targets --all-features -- -D warnings
+          name: clippy
+
+      - uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --manifest-path=Cargo.toml --all -- --check
