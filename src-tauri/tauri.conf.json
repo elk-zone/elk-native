@@ -52,7 +52,7 @@
         "style-src": "'self'",
         "img-src": "'self' data: https:",
         "media-src": "https:",
-        "font-src": "https://fonts.gstatic.com",
+        "font-src": "'self'",
         "connect-src": "https: wss:"
       }
     },
