@@ -39,7 +39,7 @@ jobs:
 
       - name: Mock Files
         run: |
-          mkdir build
+          mkdir elk/.output/public
       - uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
