@@ -37,7 +37,7 @@ git submodule update --init elk
 Then install the frontend dependencies:
 
 ```
-pnpm i
+cd elk && pnpm i
 ```
 
 Then you can run the app in development mode:
