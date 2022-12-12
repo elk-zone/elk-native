@@ -42,9 +42,10 @@ jobs:
             arch: x86_64
             rust_target: x86_64-pc-windows-msvc
     steps:
+      - name: Set key for private elk repo
+        run: ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
       - uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.PRIVATE_ELK_KEY }}
           submodules: true
 
       - name: 'Setup Rust'
