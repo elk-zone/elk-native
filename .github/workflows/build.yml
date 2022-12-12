@@ -44,9 +44,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set key for private elk repo
+        if: "matrix.config.os != 'windows-latest'"
         run: |
           eval `ssh-agent -s`
           ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
+          git submodule update --init elk
+      - name: Set key for private elk repo
+        if: "matrix.config.os == 'windows-latest'"
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - < '${{ secrets.PRIVATE_ELK_KEY }}'
           git submodule update --init elk
  
       - name: 'Setup Rust'
