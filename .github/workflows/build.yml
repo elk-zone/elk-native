@@ -53,7 +53,7 @@ jobs:
         if: "matrix.config.os == 'windows-latest'"
         run: |
           eval `ssh-agent -s`
-          ssh-add - < '${{ secrets.PRIVATE_ELK_KEY }}'
+          '${{ secrets.PRIVATE_ELK_KEY }}' | ssh-add -
           git submodule update --init elk
  
       - name: 'Setup Rust'
