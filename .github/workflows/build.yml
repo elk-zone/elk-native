@@ -44,6 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ssh-key: ${{ secrets.PRIVATE_ELK_KEY }}
           submodules: true
 
       - name: 'Setup Rust'
