@@ -33,7 +33,7 @@ First, clone the submodule in the `elk` folder.
 git submodule update --init elk
 ```
 
-Then install the frontend dependencies:
+Next install the frontend dependencies:
 
 ```
 cd elk && pnpm i
