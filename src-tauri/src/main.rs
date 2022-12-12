@@ -5,16 +5,16 @@
 
 use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
-use tauri_plugin_log::{LogTarget, LoggerBuilder};
 #[cfg(debug_assertions)]
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
+use tauri_plugin_log::{LogTarget, LoggerBuilder};
 
 fn main() {
     let log_plugin = {
         let targets = [
             LogTarget::LogDir,
             #[cfg(debug_assertions)]
-            LogTarget::Stdout
+            LogTarget::Stdout,
         ];
 
         let filter = std::env::var("RUST_LOG")
