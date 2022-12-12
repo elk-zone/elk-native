@@ -82,9 +82,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{matrix.config.arch}}-pnpm-store-
 
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          run_install: true
+      - name: Install dependencies
+        run: cd elk && pnpm install
 
       # - name: create apple private key file
       #   if: "matrix.config.os == 'macos-latest'"
