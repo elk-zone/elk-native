@@ -52,7 +52,6 @@ jobs:
       - name: Set key for private elk repo
         if: "matrix.config.os == 'windows-latest'"
         run: |
-          eval `ssh-agent -s`
           '${{ secrets.PRIVATE_ELK_KEY }}' | ssh-add -
           git submodule update --init elk
  
