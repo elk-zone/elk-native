@@ -14,9 +14,7 @@ fn main() {
         let targets = [
             LogTarget::LogDir,
             #[cfg(debug_assertions)]
-            LogTarget::Stdout,
-            #[cfg(debug_assertions)]
-            LogTarget::Webview,
+            LogTarget::Stdout
         ];
 
         let filter = std::env::var("RUST_LOG")

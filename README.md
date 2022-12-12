@@ -51,3 +51,9 @@ To create a production build of the app:
 ```
 cargo tauri build
 ```
+
+## Logging
+
+This app uses a unified logging stream that encompasses both logs from the Rust Core as well as from the frontend. Log levels and filters can be set through the `RUST_LOG` environment variable (this also works in a release mode app).
+
+For more information on how to specify log levels and filters see [the env_logger docs](https://docs.rs/env_logger/latest/env_logger/index.html).
