@@ -42,17 +42,12 @@ jobs:
             arch: x86_64
             rust_target: x86_64-pc-windows-msvc
     steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ github.token }}
-          ssh-key: ${{ secrets.PRIVATE_ELK_KEY }}
-          submodules: true
-      # - name: Set key for private elk repo
-      #   run: |
-      #     eval `ssh-agent -s`
-      #     ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
-      #     git submodule update --init elk
-
+      - name: Set key for private elk repo
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
+          git submodule update --init elk
+ 
       - name: 'Setup Rust'
         uses: actions-rs/toolchain@v1
         with:
