@@ -43,11 +43,15 @@ jobs:
             rust_target: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v3
-      - name: Set key for private elk repo
-        run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
-          git submodule update --init elk
+        with:
+          token: ${{ github.token }}
+          ssh-key: ${{ secrets.PRIVATE_ELK_KEY }}
+          submodules: true
+      # - name: Set key for private elk repo
+      #   run: |
+      #     eval `ssh-agent -s`
+      #     ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
+      #     git submodule update --init elk
 
       - name: 'Setup Rust'
         uses: actions-rs/toolchain@v1
@@ -103,6 +107,11 @@ jobs:
       #   run:
       #     node scripts/update-cargo-toml.mjs ./desktop/app/Cargo.toml ${{
       #     needs.get-version.outputs.version }}
+      - name: 'Install native packages'
+        if: "matrix.config.os == 'ubuntu-latest'"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libayatana-appindicator3-dev librsvg2-dev patchelf
 
       - uses: JonasKruckenberg/tauri-build@v1.2.2
         id: tauri_build
