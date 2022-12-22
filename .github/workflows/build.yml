@@ -120,13 +120,12 @@ jobs:
         env:
           VERSION: ${{ needs.get-version.outputs.version }}
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          # ENABLE_CODE_SIGNING: '${{ secrets.APPLE_CERTIFICATE }}'
-          # APPLE_API_ISSUER: '${{ secrets.APPLE_API_ISSUER }}'
-          # APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
-          # APPLE_CERTIFICATE: '${{ secrets.APPLE_CERTIFICATE }}'
-          # APPLE_CERTIFICATE_PASSWORD:
-          # '${{ secrets.APPLE_CERTIFICATE_PASSWORD }}'
-          # APPLE_SIGNING_IDENTITY: '${{ secrets.APPLE_SIGNING_IDENTITY }}'
+          ENABLE_CODE_SIGNING: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_API_ISSUER: '${{ secrets.APPLE_API_ISSUER }}'
+          APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
+          APPLE_CERTIFICATE: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_CERTIFICATE_PASSWORD: '${{ secrets.APPLE_CERTIFICATE_PASSWORD }}'
+          APPLE_SIGNING_IDENTITY: '${{ secrets.APPLE_SIGNING_IDENTITY }}'
           # TAURI_KEY_PASSWORD: '${{ secrets.TAURI_KEY_PASSWORD }}'
           # TAURI_PRIVATE_KEY: '${{ secrets.TAURI_PRIVATE_KEY }}'
         with:
