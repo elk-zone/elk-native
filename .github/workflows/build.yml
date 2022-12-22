@@ -3,7 +3,7 @@ name: Build
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 */2 * 1-5'
+    - cron: "0 0 */2 * 1-5"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -38,9 +38,9 @@ jobs:
           - os: macos-latest
             arch: aarch64
             rust_target: aarch64-apple-darwin
-          - os: windows-latest
-            arch: x86_64
-            rust_target: x86_64-pc-windows-msvc
+          # - os: windows-latest
+          #   arch: x86_64
+          #   rust_target: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v3
       - name: Set key for private elk repo
@@ -54,8 +54,8 @@ jobs:
         run: |
           '${{ secrets.PRIVATE_ELK_KEY }}' | ssh-add -
           git submodule update --init elk
- 
-      - name: 'Setup Rust'
+
+      - name: "Setup Rust"
         uses: actions-rs/toolchain@v1
         with:
           default: true
@@ -109,7 +109,7 @@ jobs:
       #   run:
       #     node scripts/update-cargo-toml.mjs ./desktop/app/Cargo.toml ${{
       #     needs.get-version.outputs.version }}
-      - name: 'Install native packages'
+      - name: "Install native packages"
         if: "matrix.config.os == 'ubuntu-latest'"
         run: |
           sudo apt-get update
@@ -161,10 +161,10 @@ jobs:
         run: |
           mv "./artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/x86_64/macos/Elk_${{ needs.get-version.outputs.version }}_x86.app.tar.gz"
           mv "./artifacts/aarch64/macos/Elk.app.tar.gz" "./artifacts/aarch64/macos/Elk_${{ needs.get-version.outputs.version }}_aarch64.app.tar.gz"
-      - name: 'create release'
+      - name: "create release"
         uses: softprops/action-gh-release@master
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           tag_name: nightly${{ needs.get-version.outputs.version }}
           prerelease: true
