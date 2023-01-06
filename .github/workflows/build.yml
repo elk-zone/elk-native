@@ -68,33 +68,22 @@ jobs:
         with:
           key: ${{ matrix.config.rust_target }}
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
         with:
           version: 7
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-${{matrix.config.arch}}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-${{matrix.config.arch}}-pnpm-store-
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: elk/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: cd elk && pnpm install
+        run: cd elk && pnpm install --force
 
       # - name: create apple private key file
       #   if: "matrix.config.os == 'macos-latest'"
