@@ -2,8 +2,8 @@ name: Build
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 */2 * 1-5"
+  # schedule:
+  #   - cron: "0 0 */2 * 1-5"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
