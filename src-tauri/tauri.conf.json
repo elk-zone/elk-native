@@ -28,7 +28,7 @@
         "icons-dev/icon.icns",
         "icons-dev/icon.ico"
       ],
-      "identifier": "zone.elk.desktop",
+      "identifier": "zone.elk.native",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
