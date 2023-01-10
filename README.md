@@ -29,7 +29,19 @@ We're really excited that you're interested in contributing to Elk! Please read 
 
 First you will need to install Rust and other system dependencies required for developing a Tauri app, you can follow [this guide](https://tauri.app/v1/guides/getting-started/prerequisites).
 
-First, clone the submodule in the `elk` folder.
+Next, you need to install the Tauri CLI which is used to orchestrate the build and package up the final app:
+
+```sh
+cargo install tauri-cli
+# or
+npm install -g @tauri-apps/cli
+# or 
+pnpm install -g @tauri-apps/cli
+# or
+yarn add -g @tauri-apps/cli
+```
+
+Now clone the submodule in the `elk` folder.
 
 ```
 git submodule update --init elk
