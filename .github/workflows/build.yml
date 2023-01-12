@@ -88,8 +88,8 @@ jobs:
       - name: create apple private key file
         if: "matrix.config.os == 'macos-latest'"
         run: |
-          mkdir ./private_keys
-          echo "$APPLE_API_PRIVKEY" > ./private_keys/AuthKey_$APPLE_API_KEY.p8
+          mkdir ./src-tauri/private_keys
+          echo "$APPLE_API_PRIVKEY" > ./src-tauri/private_keys/AuthKey_$APPLE_API_KEY.p8
         env:
           APPLE_API_PRIVKEY: '${{ secrets.APPLE_API_PRIVKEY }}'
           APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
