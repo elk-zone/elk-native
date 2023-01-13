@@ -15,12 +15,10 @@ Elk Native is even more early alpha than the web version, but we would love your
 The web client code lives at https://github.com/elk-zone/elk, a repository that will be open-sourced once we are ready to promote the app widely. If you would like to help us with testing, feedback, or contributing, join our [discord](https://chat.elk.zone) and get involved.
 
 <div align="center">
-
-![Screenshot of the app, showing the federated timeline home](./Screenshot-light.png#gh-light-mode-only)
-![Screenshot of the app, showing the federated timeline home](./Screenshot-dark.png#gh-dark-mode-only)
-![Screenshot of the mobile app, showing the elk account](./Screenshot-mobile-light.png#gh-light-mode-only)
-![Screenshot of the mobile app, showing the elk account](./Screenshot-mobile-dark.png#gh-dark-mode-only)
-
+  <img height="793" alt="Screenshot of the app, showing the federated timeline home" src="./Screenshot-light.png#gh-light-mode-only"/>
+  <img height="793" alt="Screenshot of the app, showing the federated timeline home" src="./Screenshot-dark.png#gh-dark-mode-only"/>
+  <img height="793" alt="Screenshot of the mobile app, showing the elk account" src="./Screenshot-mobile-light.png#gh-light-mode-only"/>
+  <img height="793" alt="Screenshot of the mobile app, showing the elk account" src="./Screenshot-mobile-dark.png#gh-dark-mode-only"/>
 </div>
 
 
