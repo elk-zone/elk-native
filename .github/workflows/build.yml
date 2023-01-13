@@ -38,9 +38,9 @@ jobs:
           - os: macos-latest
             arch: aarch64
             rust_target: aarch64-apple-darwin
-          # - os: windows-latest
-          #   arch: x86_64
-          #   rust_target: x86_64-pc-windows-msvc
+          - os: windows-latest
+            arch: x86_64
+            rust_target: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v3
       - name: Set key for private elk repo
@@ -150,6 +150,7 @@ jobs:
         run: |
           mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ needs.get-version.outputs.version }}_x86.app.tar.gz"
           mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ needs.get-version.outputs.version }}_aarch64.app.tar.gz"
+      
       - name: "create release"
         uses: softprops/action-gh-release@master
         env:
