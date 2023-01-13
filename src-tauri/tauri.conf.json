@@ -17,9 +17,6 @@
       "active": true,
       "category": "SocialNetworking",
       "copyright": "",
-      "deb": {
-        "depends": []
-      },
       "externalBin": [],
       "icon": [
         "icons-dev/32x32.png",
@@ -30,13 +27,6 @@
       ],
       "identifier": "zone.elk.native",
       "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
       "resources": [],
       "shortDescription": "",
       "targets": ["app", "msi", "appimage"],
@@ -44,6 +34,19 @@
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
         "timestampUrl": ""
+      },
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "iOS": {
+        "developmentTeam": "foobar"
+      },
+      "deb": {
+        "depends": []
       }
     },
     "security": {
