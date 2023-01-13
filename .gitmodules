@@ -1,3 +1,3 @@
 [submodule "elk"]
 	path = elk
-	url = git@github.com:elk-zone/elk.git
+	url = https://github.com/elk-zone/elk.git
