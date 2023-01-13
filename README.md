@@ -27,6 +27,8 @@ We're really excited that you're interested in contributing to Elk! Please read 
 
 ## Local Setup
 
+> NOTE: This branch depends on the currently WIP Tauri mobile branch, you should [follow the steps here](https://next--tauri.netlify.app/next/guides/getting-started/prerequisites) to set up a local development environment including XCode and Android Studio
+
 First you will need to install Rust and other system dependencies required for developing a Tauri app, you can follow [this guide](https://tauri.app/v1/guides/getting-started/prerequisites).
 
 Next, you need to install the Tauri CLI which is used to orchestrate the build and package up the final app:
