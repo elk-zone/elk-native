@@ -9,17 +9,20 @@ default-run = "app"
 edition = "2021"
 rust-version = "1.59"
 
+[lib]
+crate-type = ["staticlib", "cdylib", "rlib"]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.2.1", features = [] }
+tauri-build = { version = "2.0.0-alpha.0", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.2.3", features = [] }
-tauri-plugin-log = { git = "https://github.com/tauri-apps/tauri-plugin-log", branch = "dev",  features = ["colored"] }
-tauri-plugin-store = { git = "https://github.com/tauri-apps/tauri-plugin-store", branch = "dev" }
+tauri = { version = "2.0.0-alpha.2", features = [] }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "next",  features = ["colored"] }
+tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "next" }
 log = "0.4.17"
 env_logger = "0.10.0"
 
