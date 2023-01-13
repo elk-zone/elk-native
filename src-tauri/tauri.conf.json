@@ -62,10 +62,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 700,
         "resizable": true,
         "title": "Elk",
-        "width": 800,
+        "width": 1000,
         "titleBarStyle": "Overlay",
         "hiddenTitle": true
       }
