@@ -39,7 +39,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": ["app", "msi", "appimage"],
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
