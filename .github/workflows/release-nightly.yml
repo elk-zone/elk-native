@@ -140,11 +140,25 @@ jobs:
           name: artifacts-aarch64
           path: artifacts/aarch64
 
-      - name: Rename .app artifacts
+      - name: Rename artifacts
         run: |
-          mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ needs.get-version.outputs.version }}_x86.app.tar.gz"
-          mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ needs.get-version.outputs.version }}_aarch64.app.tar.gz"
-      
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.app.tar.gz"
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.app.tar.gz.sig"
+          mv "artifacts/x86_64/dmg/Elk_0.0.0_x64.dmg" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.dmg"
+
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_macos_aarch64.app.tar.gz"
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ github.ref_name }}_macos_aarch64.app.tar.gz.sig"
+          mv "artifacts/aarch64/dmg/Elk_0.0.0_aarch64.dmg" "./artifacts/Elk_${{ github.ref_name }}_macos_aarch64.dmg"
+
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi" "./artifacts/Elk_${{ github.ref_name }}_windows_x86_64.msi"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip" "./artifacts/Elk_${{ github.ref_name }}_windows_x86_64.msi.zip"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip.sig" "./artifacts/Elk_${{ github.ref_name }}_windows_x86_64.msi.zip.sig"
+          
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage" "./artifacts/Elk_v0.0.0_linux_x86_64.AppImage"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_linux_x86_64.AppImage.tar.gz"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ github.ref_name }}_linux_x86_64.AppImage.tar.gz.sig"
+          mv "artifacts/x86_64/deb/elk_0.0.0_amd64.deb" "./artifacts/Elk_${{ github.ref_name }}_linux_x86_64.deb"
+          
       - name: "create release"
         uses: softprops/action-gh-release@master
         env:
@@ -162,5 +176,6 @@ jobs:
         run: |
           git config --global user.name "${{ github.event.pusher.name }}"
           git config --global user.email "${{ github.event.pusher.email }}"
+          git add latest-stable.json
           git commit -am "Update latest.json"
           git push

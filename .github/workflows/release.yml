@@ -133,7 +133,7 @@ jobs:
           name: artifacts-aarch64
           path: artifacts/aarch64
 
-      - name: Rename .app artifacts
+      - name: Rename artifacts
         run: |
           mv "artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.app.tar.gz"
           mv "artifacts/x86_64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.app.tar.gz.sig"
@@ -168,5 +168,6 @@ jobs:
         run: |
           git config --global user.name "${{ github.event.pusher.name }}"
           git config --global user.email "${{ github.event.pusher.email }}"
+          git add latest-stable.json
           git commit -am "Update latest.json"
           git push
