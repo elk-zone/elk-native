@@ -152,7 +152,7 @@ jobs:
           files: ./artifacts/**/*
 
       - name: Generate latest.json file
-        run: node scripts/latest-json.mjs ${{ github.ref_name }}
+        run: node scripts/latest-json.mjs ${{ github.ref_name }} stable
 
       - name: Commit latest.json
         run: |

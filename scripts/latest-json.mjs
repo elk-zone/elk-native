@@ -9,6 +9,7 @@ async function main() {
   process.chdir(join(process.cwd(), './artifacts'))
 
   const tag = process.argv[2]
+  const channel = process.argv[2] // either nightly or stable
 
   const obj = {
     name: tag.replace('v', ''),
@@ -31,7 +32,7 @@ async function main() {
     }
   }
 
-  writeFile('latest.json', JSON.stringify(obj, null, 2))
+  writeFile(`latest-${channel}.json`, JSON.stringify(obj, null, 2))
 }
 main()
 

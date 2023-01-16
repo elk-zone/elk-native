@@ -9,6 +9,9 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ]
+    },
+    "updater": {
+      "endpoints": ["https://raw.githubusercontent.com/elk-zone/elk-native/main/latest-stable.json"]
     }
   }
 }

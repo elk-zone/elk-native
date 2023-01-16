@@ -154,3 +154,13 @@ jobs:
           prerelease: true
           generate_release_notes: true
           files: ./artifacts/**/*
+
+      - name: Generate latest.json file
+        run: node scripts/latest-json.mjs ${{ github.ref_name }} nightly
+
+      - name: Commit latest.json
+        run: |
+          git config --global user.name "${{ github.event.pusher.name }}"
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git commit -am "Update latest.json"
+          git push
