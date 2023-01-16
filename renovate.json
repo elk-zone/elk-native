@@ -1,0 +1,12 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "enabledManagers": [
+        "cargo",
+        "npm"
+    ],
+    "git-submodules": {
+        "enabled": true
+    }
+}
