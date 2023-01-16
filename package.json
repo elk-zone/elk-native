@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "tiny-glob": "^0.2.9"
+  }
 }

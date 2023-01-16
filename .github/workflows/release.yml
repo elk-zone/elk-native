@@ -105,6 +105,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: elk/pnpm-lock.yaml
+
+      - name: Run pnpm install
+        run: pnpm install
+
       - name: Download x86_64 artifacts
         uses: actions/download-artifact@v3
         with:
@@ -119,9 +136,13 @@ jobs:
 
       - name: Rename .app artifacts
         run: |
-          mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ github.ref_name }}_x86.app.tar.gz"
-          mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ github.ref_name }}_aarch64.app.tar.gz"
-      
+          mv "artifacts/x86_64/Elk.app.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_macos_x86_64.app.tar.gz"
+          mv "artifacts/aarch64/Elk.app.tar.gz" "./artifacts/Elk_${{ github.ref_name }}_macos_aarch64.app.tar.gz"
+
+          mv "artifacts/x86_64/Elk_0.1.0_x64_en-US.msi" "./artifacts/Elk_${{ github.ref_name }}_windows_x86_64.msi"
+          
+          mv "artifacts/x86_64/elk_0.1.0_amd64.AppImage" "./artifacts/Elk_${{ github.ref_name }}_linux_x86_64.AppImage"
+                
       - name: "create release"
         uses: softprops/action-gh-release@master
         env:
@@ -130,3 +151,13 @@ jobs:
           prerelease: true
           generate_release_notes: true
           files: ./artifacts/**/*
+
+      - name: Generate latest.json file
+        run: node scripts/latest-json.mjs ${{ github.ref_name }}
+
+      - name: Commit latest.json
+        run: |
+          git config --global user.name "${{ github.event.pusher.name }}"
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git commit -am "Update latest.json"
+          git push
