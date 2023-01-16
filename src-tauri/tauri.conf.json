@@ -6,8 +6,7 @@
     "distDir": "../elk/.output/public"
   },
   "package": {
-    "productName": "Elk",
-    "version": "0.1.0"
+    "productName": "Elk"
   },
   "tauri": {
     "allowlist": {

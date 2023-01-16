@@ -6,10 +6,10 @@ import glob from 'tiny-glob'
 const BASE_URL = 'https://github.com/elk-zone/elk-native/releases/download'
 
 async function main() {
-  process.chdir(join(process.cwd(), './artifacts'))
+  // process.chdir(join(process.cwd(), './artifacts'))
 
   const tag = process.argv[2]
-  const channel = process.argv[2] // either nightly or stable
+  const channel = process.argv[3] // either nightly or stable
 
   const obj = {
     name: tag.replace('v', ''),
@@ -47,7 +47,7 @@ async function getNotesForTag(tag) {
 }
 
 async function getPlatform(tag, arch, exts) {
-  const [artifact, signature] = await glob(`**/*${arch}.{${exts.join(',')}}`)
+  const [artifact, signature] = await glob(`./artifacts/**/*${arch}.{${exts.join(',')}}`)
 
   return {
     url: `${BASE_URL}/${tag}/${artifact}`,
