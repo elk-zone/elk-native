@@ -1,33 +1,21 @@
-name: Build
+name: Release
 
 permissions:
   contents: write
 
 on:
-  workflow_dispatch:
-  # schedule:
-  #   - cron: "0 0 */2 * 1-5"
+  push:
+    tags:
+      - 'v*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  get-version:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.current_time.outputs.formattedTime }}
-    steps:
-      - name: Get current time
-        uses: srfrnk/current-time@master
-        id: current_time
-        with:
-          format: YY.M.D
-
   build-binaries:
     runs-on: ${{ matrix.config.os }}
     timeout-minutes: 40
-    needs: get-version
     strategy:
       fail-fast: false
       matrix:
@@ -46,30 +34,17 @@ jobs:
             rust_target: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v3
-      - name: Set key for private elk repo
-        if: "matrix.config.os != 'windows-latest'"
-        run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.PRIVATE_ELK_KEY }}'
-          git submodule update --init elk
-      - name: Set key for private elk repo
-        if: "matrix.config.os == 'windows-latest'"
-        run: |
-          '${{ secrets.PRIVATE_ELK_KEY }}' | ssh-add -
-          git submodule update --init elk
+        with:
+          submodules: true
 
       - name: "Setup Rust"
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          default: true
-          override: true
-          profile: minimal
-          toolchain: stable
-          target: ${{ matrix.config.rust_target }}
+            targets: ${{ matrix.config.rust_target }}
 
       - uses: Swatinem/rust-cache@v2
         with:
-          key: ${{ matrix.config.rust_target }}
+            key: ${{ matrix.config.rust_target }}
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
@@ -88,6 +63,12 @@ jobs:
       - name: Install dependencies
         run: cd elk && pnpm install --force
 
+      - name: "Install native packages"
+        if: "matrix.config.os == 'ubuntu-latest'"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libayatana-appindicator3-dev librsvg2-dev patchelf
+
       - name: create apple private key file
         if: "matrix.config.os == 'macos-latest'"
         run: |
@@ -97,20 +78,9 @@ jobs:
           APPLE_API_PRIVKEY: '${{ secrets.APPLE_API_PRIVKEY }}'
           APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
 
-      # - name: Set version in Cargo.toml
-      #   run:
-      #     node scripts/update-cargo-toml.mjs ./desktop/app/Cargo.toml ${{
-      #     needs.get-version.outputs.version }}
-      - name: "Install native packages"
-        if: "matrix.config.os == 'ubuntu-latest'"
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libayatana-appindicator3-dev librsvg2-dev patchelf
-
       - uses: JonasKruckenberg/tauri-build@v1.2.2
         id: tauri_build
         env:
-          VERSION: ${{ needs.get-version.outputs.version }}
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           ENABLE_CODE_SIGNING: '${{ secrets.APPLE_CERTIFICATE }}'
           APPLE_API_ISSUER: '${{ secrets.APPLE_API_ISSUER }}'
@@ -130,12 +100,10 @@ jobs:
           path: "${{ join(fromJSON(steps.tauri_build.outputs.artifacts), '\n') }}"
 
   publish-to-github:
-    needs: [get-version, build-binaries]
+    needs: [build-binaries]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.branch }}
 
       - name: Download x86_64 artifacts
         uses: actions/download-artifact@v3
@@ -151,15 +119,14 @@ jobs:
 
       - name: Rename .app artifacts
         run: |
-          mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ needs.get-version.outputs.version }}_x86.app.tar.gz"
-          mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ needs.get-version.outputs.version }}_aarch64.app.tar.gz"
+          mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ github.ref_name }}_x86.app.tar.gz"
+          mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ github.ref_name }}_aarch64.app.tar.gz"
       
       - name: "create release"
         uses: softprops/action-gh-release@master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          tag_name: nightly${{ needs.get-version.outputs.version }}
           prerelease: true
           generate_release_notes: true
           files: ./artifacts/**/*

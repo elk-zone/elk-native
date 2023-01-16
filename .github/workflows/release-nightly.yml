@@ -1,0 +1,156 @@
+name: Release Nightly
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 0 */2 * 1-5"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.current_time.outputs.formattedTime }}
+    steps:
+      - name: Get current time
+        uses: srfrnk/current-time@master
+        id: current_time
+        with:
+          format: YY.M.D
+
+  build-binaries:
+    runs-on: ${{ matrix.config.os }}
+    timeout-minutes: 40
+    needs: get-version
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: ubuntu-latest
+            arch: x86_64
+            rust_target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            arch: x86_64
+            rust_target: x86_64-apple-darwin
+          - os: macos-latest
+            arch: aarch64
+            rust_target: aarch64-apple-darwin
+          - os: windows-latest
+            arch: x86_64
+            rust_target: x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: "Setup Rust"
+        uses: actions-rs/toolchain@v1
+        with:
+          default: true
+          override: true
+          profile: minimal
+          toolchain: stable
+          target: ${{ matrix.config.rust_target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.config.rust_target }}
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: elk/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: cd elk && pnpm install --force
+
+      - name: create apple private key file
+        if: "matrix.config.os == 'macos-latest'"
+        run: |
+          mkdir ./src-tauri/private_keys
+          echo "$APPLE_API_PRIVKEY" > ./src-tauri/private_keys/AuthKey_$APPLE_API_KEY.p8
+        env:
+          APPLE_API_PRIVKEY: '${{ secrets.APPLE_API_PRIVKEY }}'
+          APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
+
+      # - name: Set version in Cargo.toml
+      #   run:
+      #     node scripts/update-cargo-toml.mjs ./desktop/app/Cargo.toml ${{
+      #     needs.get-version.outputs.version }}
+      - name: "Install native packages"
+        if: "matrix.config.os == 'ubuntu-latest'"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libayatana-appindicator3-dev librsvg2-dev patchelf
+
+      - uses: JonasKruckenberg/tauri-build@v1.2.2
+        id: tauri_build
+        env:
+          VERSION: ${{ needs.get-version.outputs.version }}
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          ENABLE_CODE_SIGNING: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_API_ISSUER: '${{ secrets.APPLE_API_ISSUER }}'
+          APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
+          APPLE_CERTIFICATE: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_CERTIFICATE_PASSWORD: '${{ secrets.APPLE_CERTIFICATE_PASSWORD }}'
+          APPLE_SIGNING_IDENTITY: '${{ secrets.APPLE_SIGNING_IDENTITY }}'
+          # TAURI_KEY_PASSWORD: '${{ secrets.TAURI_KEY_PASSWORD }}'
+          # TAURI_PRIVATE_KEY: '${{ secrets.TAURI_PRIVATE_KEY }}'
+        with:
+          target: ${{ matrix.config.rust_target }}
+          # args: --verbose
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-${{ matrix.config.arch }}
+          path: "${{ join(fromJSON(steps.tauri_build.outputs.artifacts), '\n') }}"
+
+  publish-to-github:
+    needs: [get-version, build-binaries]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+
+      - name: Download x86_64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-x86_64
+          path: artifacts/x86_64
+
+      - name: Download aarch64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-aarch64
+          path: artifacts/aarch64
+
+      - name: Rename .app artifacts
+        run: |
+          mv "./artifacts/x86_64/Elk.app.tar.gz" "./artifacts/x86_64/Elk_${{ needs.get-version.outputs.version }}_x86.app.tar.gz"
+          mv "./artifacts/aarch64/Elk.app.tar.gz" "./artifacts/aarch64/Elk_${{ needs.get-version.outputs.version }}_aarch64.app.tar.gz"
+      
+      - name: "create release"
+        uses: softprops/action-gh-release@master
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          tag_name: nightly${{ needs.get-version.outputs.version }}
+          prerelease: true
+          generate_release_notes: true
+          files: ./artifacts/**/*
