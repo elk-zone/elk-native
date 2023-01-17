@@ -34,7 +34,7 @@ async function main() {
 main()
 
 async function getPlatform(version, arch, exts) {
-  const [artifact, signature] = await glob(`./artifacts/**/*${arch}.{${exts.join(',')}}`, { cwd: join(process.cwd(), "./artifacts") })
+  const [artifact, signature] = await glob(`./**/*${arch}.{${exts.join(',')}}`, { cwd: join(process.cwd(), "./artifacts") })
 
   return {
     url: `${BASE_URL}/v${version}/${artifact}`,
