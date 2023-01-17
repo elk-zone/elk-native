@@ -38,6 +38,6 @@ async function getPlatform(version, arch, exts) {
 
   return {
     url: `${BASE_URL}/v${version}/${artifact}`,
-    signature: await readFile(signature, 'utf-8')
+    signature: await readFile(join(process.cwd(), './artifacts', signature), 'utf-8')
   }
 }
