@@ -57,6 +57,17 @@ jobs:
           labels: 'version updates'
           branch: 'release'
           body: ${{ steps.covector-version.outputs.change }}
+      
+      - name: Write release notes
+        if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
+        run: echo "${{ steps.covector-version.outputs.change }}" > RELEASE_NOTES.txt
+
+      - name: Save Release Notes
+        if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
+        uses: actions/cache/save@v3
+        with:
+          path: RELEASE_NOTES.txt
+          key: release-notes
 
   build-binaries:
     runs-on: ${{ matrix.config.os }}
@@ -208,6 +219,14 @@ jobs:
           mv "artifacts/x86_64/appimage/elk_${{ needs.version-or-publish.outputs.version }}_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz"
           mv "artifacts/x86_64/appimage/elk_${{ needs.version-or-publish.outputs.version }}_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz.sig"
           mv "artifacts/x86_64/deb/elk_${{ needs.version-or-publish.outputs.version }}_amd64.deb" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.deb"
+
+      - name: Restore Release Notes
+        id: cache-primes-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: RELEASE_NOTES.txt
+          key: release-notes
+
       - name: Generate latest.json file
         run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} stable
         env:
