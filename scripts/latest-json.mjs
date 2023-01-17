@@ -1,5 +1,6 @@
-import {readFile, writeFile} from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import glob from 'tiny-glob'
+import { join } from 'node:path'
 
 const BASE_URL = 'https://github.com/elk-zone/elk-native/releases/download'
 
@@ -33,7 +34,7 @@ async function main() {
 main()
 
 async function getPlatform(version, arch, exts) {
-  const [artifact, signature] = await glob(`./artifacts/**/*${arch}.{${exts.join(',')}}`)
+  const [artifact, signature] = await glob(`./artifacts/**/*${arch}.{${exts.join(',')}}`, { cwd: join(process.cwd(), "./artifacts") })
 
   return {
     url: `${BASE_URL}/v${version}/${artifact}`,
