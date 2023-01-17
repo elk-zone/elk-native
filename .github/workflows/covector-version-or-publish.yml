@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 65
     outputs:
-      change: ${{ steps.covector.outputs.change }}
+      templatePipe: ${{ steps.covector.outputs.templatePipe }}
       willPublish: ${{ steps.covector-status.outputs.willPublish-elk-native }}
       version: ${{ steps.covector-status.outputs.version-elk-native }}
 
@@ -220,7 +220,7 @@ jobs:
       - name: Generate latest.json file
         run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} stable
         env:
-          CHANGELOG: '${{ needs.version-or-publish.outputs.change }}'
+          CHANGELOG: '${{ needs.version-or-publish.outputs.templatePipe }}'
 
       - name: Commit latest.json
         run: |

@@ -8,9 +8,11 @@ async function main() {
   const version = process.argv[2]
   const channel = process.argv[3] // either nightly or stable
 
+  console.log(process.env.CHANGELOG);
+
   const obj = {
     name: version,
-    notes: await readFile('RELEASE_NOTES.txt', 'utf-8'),
+    notes: JSON.parse(process.env.CHANGELOG)['elk-native'].pipe.pkg.changelog,
     pub_date: new Date().toISOString(),
     platforms: {
       'darwin-aarch64': await getPlatform(version, 'aarch64', [
