@@ -166,9 +166,8 @@ jobs:
 
       - name: Commit latest.json
         run: |
-          git config --global user.name "${{ github.event.pusher.name }}"
-          git config --global user.email "${{ github.event.pusher.email }}"
-          git checkout main
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add latest-stable.json
           git commit -am "Update latest.json"
           git push

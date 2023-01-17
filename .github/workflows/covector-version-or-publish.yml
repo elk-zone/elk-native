@@ -1,0 +1,202 @@
+name: covector version or publish
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version-or-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    outputs:
+      change: ${{ steps.covector.outputs.change }}
+      willPublish: ${{ steps.covector-status.outputs.willPublish-elk-native }}
+      version: ${{ steps.covector-status.outputs.version-elk-native }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # required for use of git history
+      
+      - name: covector status
+        uses: jbolda/covector/packages/action@covector-v0
+        id: covector-status
+        with:
+          command: 'status'
+
+      - name: git config
+        if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
+        run: |
+          git config --global user.name "${{ github.event.pusher.name }}"
+          git config --global user.email "${{ github.event.pusher.email }}"
+
+      - name: covector version
+        uses: jbolda/covector/packages/action@covector-v0
+        id: covector-version
+        if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          command: 'version'
+
+      - name: Create Pull Request With Versions Bumped
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
+        with:
+          title: 'Publish New Versions'
+          commit-message: 'publish new versions'
+          labels: 'version updates'
+          branch: 'release'
+          body: ${{ steps.covector-version.outputs.change }}
+
+  build-binaries:
+    runs-on: ${{ matrix.config.os }}
+    needs: [version-or-publish]
+    if: needs.version-or-publish.outputs.willPublish
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: ubuntu-latest
+            arch: x86_64
+            rust_target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            arch: x86_64
+            rust_target: x86_64-apple-darwin
+          - os: macos-latest
+            arch: aarch64
+            rust_target: aarch64-apple-darwin
+          - os: windows-latest
+            arch: x86_64
+            rust_target: x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: "Setup Rust"
+        uses: dtolnay/rust-toolchain@stable
+        with:
+            targets: ${{ matrix.config.rust_target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+            key: ${{ matrix.config.rust_target }}
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: elk/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: cd elk && pnpm install --force
+
+      - name: "Install native packages"
+        if: "matrix.config.os == 'ubuntu-latest'"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libayatana-appindicator3-dev librsvg2-dev patchelf
+
+      - name: create apple private key file
+        if: "matrix.config.os == 'macos-latest'"
+        run: |
+          mkdir ./src-tauri/private_keys
+          echo "$APPLE_API_PRIVKEY" > ./src-tauri/private_keys/AuthKey_$APPLE_API_KEY.p8
+        env:
+          APPLE_API_PRIVKEY: '${{ secrets.APPLE_API_PRIVKEY }}'
+          APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
+
+      - uses: JonasKruckenberg/tauri-build@v1.2.2
+        id: tauri_build
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          ENABLE_CODE_SIGNING: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_API_ISSUER: '${{ secrets.APPLE_API_ISSUER }}'
+          APPLE_API_KEY: '${{ secrets.APPLE_API_KEY }}'
+          APPLE_CERTIFICATE: '${{ secrets.APPLE_CERTIFICATE }}'
+          APPLE_CERTIFICATE_PASSWORD: '${{ secrets.APPLE_CERTIFICATE_PASSWORD }}'
+          APPLE_SIGNING_IDENTITY: '${{ secrets.APPLE_SIGNING_IDENTITY }}'
+          TAURI_KEY_PASSWORD: '${{ secrets.TAURI_KEY_PASSWORD }}'
+          TAURI_PRIVATE_KEY: '${{ secrets.TAURI_PRIVATE_KEY }}'
+        with:
+          target: ${{ matrix.config.rust_target }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-${{ matrix.config.arch }}
+          path: "${{ join(fromJSON(steps.tauri_build.outputs.artifacts), '\n') }}"
+
+  publish-to-github:
+    needs: [version-or-publish, build-binaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download x86_64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-x86_64
+          path: artifacts/x86_64
+
+      - name: Download aarch64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-aarch64
+          path: artifacts/aarch64
+
+      - name: Rename artifacts
+        run: |
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.app.tar.gz"
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.app.tar.gz.sig"
+          mv "artifacts/x86_64/dmg/Elk_0.0.0_x64.dmg" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.dmg"
+
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.app.tar.gz"
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.app.tar.gz.sig"
+          mv "artifacts/aarch64/dmg/Elk_0.0.0_aarch64.dmg" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.dmg"
+
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi.zip"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi.zip.sig"
+          
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage" "./artifacts/Elk_v0.0.0_linux_x86_64.AppImage"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.AppImage.tar.gz"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.AppImage.tar.gz.sig"
+          mv "artifacts/x86_64/deb/elk_0.0.0_amd64.deb" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.deb"
+      
+      - name: Generate latest.json file
+        run: node scripts/latest-json.mjs ${{ needs.version-or-release.outputs.version }} stable
+        env:
+          CHANGELOG: '${{ needs.version-or-publish.outputs.change }}'
+
+      - name: Commit latest.json
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add latest-stable.json
+          git commit -am "Update latest.json"
+          git push
+
+      - name: 'create release'
+        uses: softprops/action-gh-release@master
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        with:
+          tag_name: v${{ needs.version-or-publish.outputs.version }}
+          generate_release_notes: true
+          files: ./artifacts/**/*
