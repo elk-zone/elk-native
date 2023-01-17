@@ -58,6 +58,9 @@ jobs:
           branch: 'release'
           body: ${{ steps.covector-version.outputs.change }}
       
+      - name: Echo release notes
+        run: echo ${{ fromJSON(steps.covector-status.outputs.templatePipe) }}
+
       - name: Write release notes
         if: ${{ steps.covector-status.outputs.status != 'No changes.' }}
         run: echo "${{ steps.covector-version.outputs.change }}" > RELEASE_NOTES.txt
