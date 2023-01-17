@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 65
     outputs:
-      templatePipe: ${{ steps.covector.outputs.templatePipe }}
+      templatePipe: ${{ steps.covector-status.outputs.templatePipe }}
       willPublish: ${{ steps.covector-status.outputs.willPublish-elk-native }}
       version: ${{ steps.covector-status.outputs.version-elk-native }}
 
