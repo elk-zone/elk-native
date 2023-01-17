@@ -240,4 +240,5 @@ jobs:
         with:
           tag_name: v${{ needs.version-or-publish.outputs.version }}
           generate_release_notes: true
+          # body_path: RELEASE_NOTES.txt
           files: ./artifacts/**/*
