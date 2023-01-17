@@ -1,0 +1,23 @@
+{
+  "name": "0.0.0",
+  "notes": "",
+  "pub_date": "2023-01-17T11:52:26.562Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.0.0/artifacts/Elk_0.0.0_macos_aarch64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2lUeTcxMHBQY3FMTE5zT0pDQUNwYjFheDhxTVpQeWxqUURHTmErQitpUFY0akZGdjRJTk9WSWxoVW4wbmpWRzJPbG5qNE9BSjJOMmhEM2ZSQVlCTFEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTU2MzA5CWZpbGU6RWxrLmFwcC50YXIuZ3oKV2JkRGs3WEdieFRjalQ2eVI0a3BmNm9kNFhNeStBSlFidzdUeFNrdXZyTi9yWHJndjJTWExuOW9JdXR1Y2xZQjhMKzZ3SXozcVNNQWVvTHd5SklZRFE9PQo="
+    },
+    "darwin-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.0.0/artifacts/Elk_0.0.0_macos_x86_64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV29pR1oySEZDci9xdlJYOWo2cHlJNzFrUW1Tb3JCek1MWDJLL0cxVlZZaTdGV3oxZENaODdLN0dWYzNhQ2lnNHlZT1I0M3ptamQ2T2poY0VZZUZRc0F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTU2MTc2CWZpbGU6RWxrLmFwcC50YXIuZ3oKd0RJU2toZ1lwZHFYZEpDalowTEh0U3lyNHZNMDJzb1hJT090UDdEZkZwbloyUWVtNWZhNzB3Z2FpNVlnbXZSa0lWTElHTFY0T2k2VEZqM0hFcVhMQ1E9PQo="
+    },
+    "linux-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.0.0/artifacts/Elk_0.0.0_linux_x86_64.AppImage.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2l5emRYQXQ4UitQRmVCSXdzZVpYUXFOOWRWL2xDR3BHclVHT2V3V1lUYUIyUElHaGVNUlpCOUZZREF3Nml3OUU5TWNkTFVUK2ZKUkZ4Q1Q3MUI0MWdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTU1OTcyCWZpbGU6ZWxrXzAuMC4wX2FtZDY0LkFwcEltYWdlLnRhci5negpTbDhDVzZrekxDZjQ1TmJNK2o0MUlmek1XeUJyUFFHcEEvUDRyakF0ZG8rTVN0YnQ2RWg4L2Nac0VzYkpoU2h6eEpXL2pLTnBxdk1qWWlPU1ZlSkNDUT09Cg=="
+    },
+    "windows-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.0.0/artifacts/Elk_0.0.0_windows_x86_64.msi.zip",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2drS2VucVpnK1l4QXRsb0RvQlF3ckV2dTQ1MHVCS0hvSDVwaWo4SDVQcjVhMVhEWVVualdKZGd1Si9adTYxTHhBQ2krZkVZbzY1bHo0dXArRzZJMndZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTU2MTY3CWZpbGU6RWxrXzAuMC4wX3g2NF9lbi1VUy5tc2kuemlwCm5yY2ZEQVdmWEZxZUQ2YnVwNERucW41Z0tyT2ZCOEl1WEQ0czYvOGtYOWZqK0YzTUp1MjFUcWN3TEd2ZkxMUGJwMUJkdjJtRkZGM0pCZUxTcExKc0JRPT0K"
+    }
+  }
+}
