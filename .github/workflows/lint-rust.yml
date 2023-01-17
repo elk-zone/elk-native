@@ -1,5 +1,8 @@
 name: Lint Rust
 
+permissions:
+  pull-requests: write
+
 on:
   push:
     branches:
@@ -40,6 +43,7 @@ jobs:
       - name: Mock Files
         run: |
           mkdir -p elk/.output/public
+
       - uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
