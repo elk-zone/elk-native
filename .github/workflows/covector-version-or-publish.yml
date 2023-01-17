@@ -1,5 +1,8 @@
 name: covector version or publish
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
