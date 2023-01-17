@@ -178,25 +178,25 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          mv "artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.app.tar.gz"
-          mv "artifacts/x86_64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.app.tar.gz.sig"
-          mv "artifacts/x86_64/dmg/Elk_0.0.0_x64.dmg" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_x86_64.dmg"
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_x86_64.app.tar.gz"
+          mv "artifacts/x86_64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_x86_64.app.tar.gz.sig"
+          mv "artifacts/x86_64/dmg/Elk_0.0.0_x64.dmg" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_x86_64.dmg"
 
-          mv "artifacts/aarch64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.app.tar.gz"
-          mv "artifacts/aarch64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.app.tar.gz.sig"
-          mv "artifacts/aarch64/dmg/Elk_0.0.0_aarch64.dmg" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_macos_aarch64.dmg"
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_aarch64.app.tar.gz"
+          mv "artifacts/aarch64/macos/Elk.app.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_aarch64.app.tar.gz.sig"
+          mv "artifacts/aarch64/dmg/Elk_0.0.0_aarch64.dmg" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_macos_aarch64.dmg"
 
-          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi"
-          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi.zip"
-          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_windows_x86_64.msi.zip.sig"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi.zip"
+          mv "artifacts/x86_64/Elk_0.0.0_x64_en-US.msi.zip.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi.zip.sig"
           
           mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage" "./artifacts/Elk_v0.0.0_linux_x86_64.AppImage"
-          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.AppImage.tar.gz"
-          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.AppImage.tar.gz.sig"
-          mv "artifacts/x86_64/deb/elk_0.0.0_amd64.deb" "./artifacts/Elk_${{ needs.version-or-release.outputs.version }}_linux_x86_64.deb"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz"
+          mv "artifacts/x86_64/appimage/elk_0.0.0_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz.sig"
+          mv "artifacts/x86_64/deb/elk_0.0.0_amd64.deb" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.deb"
       
       - name: Generate latest.json file
-        run: node scripts/latest-json.mjs ${{ needs.version-or-release.outputs.version }} stable
+        run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} stable
         env:
           CHANGELOG: '${{ needs.version-or-publish.outputs.change }}'
 
@@ -206,7 +206,7 @@ jobs:
           git config user.email github-actions@github.com
           git add latest-stable.json
           git commit -am "Update latest.json"
-          git push
+          git push origin HEAD:main
 
       - name: 'create release'
         uses: softprops/action-gh-release@master
