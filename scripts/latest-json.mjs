@@ -12,7 +12,8 @@ async function main() {
 
   const obj = {
     name: version,
-    notes: JSON.parse(process.env.CHANGELOG)['elk-native'].pipe.pkg.changelog,
+    // notes: JSON.parse(process.env.CHANGELOG)['elk-native'].pipe.pkg.changelog,
+    notes: await readFile('RELEASE_NOTES.txt', 'utf-8'),
     pub_date: new Date().toISOString(),
     platforms: {
       'darwin-aarch64': await getPlatform(version, 'aarch64', [
