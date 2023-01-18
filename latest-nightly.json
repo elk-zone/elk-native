@@ -1,0 +1,23 @@
+{
+  "name": "0.1.1",
+  "notes": "## \\[0.1.1]\n\n- Fixed opening links in the browser\n  - [068037a](https://github.com/elk-zone/elk-native/commit/068037a4913e56619435c11fd1a791e525742b78) fix: Fixed opening links in the browser ([#25](https://github.com/elk-zone/elk-native/pull/25)) on 2023-01-17\n",
+  "pub_date": "2023-01-18T11:24:05.033Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.1.1/Elk_0.1.1_macos_aarch64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV3FpWXZJMEtnbTlkeUhLZXhTSWM2bVk0d3J3dGZ3d1ZYN1dqY0E3ZFBVYnQ3MTdHK29lSW9TcS9jZ0xLOWZRUlNlQzRpNFhzdlhtcjg1TDd4Y3FvWXc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MDQwOTAzCWZpbGU6RWxrLmFwcC50YXIuZ3oKMlE3QytobjltMzRoNkpZaUtycjJFb2R5MWJPcEJaS1BqUFRWNVJXQnAyeE5nSjJjT3ZncmNBUlYwb1lSbjE4aFhTR0VWNFdncDA4ZmtneXFOZDJDRHc9PQo="
+    },
+    "darwin-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.1.1/Elk_0.1.1_macos_x86_64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2dnQ1ZNZEgzaGZPOGhBVEZ5VUxWOFdQVStaZ0VwZzNuRFdsMUM0TVFvMWtVYWMybC9SQ3FvN29yYnhlWDBVZloyaXVMbXZ1eTRMNE5KblRFODBzK2dVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MDQwODA2CWZpbGU6RWxrLmFwcC50YXIuZ3oKRHdkbkxkTVZLdzRhT1M5MnYzT29sNnFLbFVqbVNDaDdpSmNFSFNEZWlOME9DWDY0OEUyN1NCdk1uVWRFMXNCa2I1VFBCd2xEM2FHTFpoblh4Z1FkQWc9PQo="
+    },
+    "linux-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.1.1/Elk_0.1.1_linux_x86_64.AppImage.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2o2dk1laDZpYjZYWXlNOW9PWWN1dlVDY1phdFk3c2FtZFpuUVNMN1RXQXNKL2lvTXJjaHJPMnNxQmhnVzU4OGV0VGJyUHRveVdmM2ZxT1B3NVRJMmdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MDQwNjcxCWZpbGU6ZWxrXzAuMS4xX2FtZDY0LkFwcEltYWdlLnRhci5negpvb0F4b0Q5aDVmMkd2byttMDJNS3hEZTBPbG13Y0JEbTByZ2h5VC81Zkk4V0hINmxpRytSOGNrVHJlbm56d0UvMnpkeEk1STRJRGYzeU11TWJtTVBDQT09Cg=="
+    },
+    "windows-x86_64": {
+      "url": "https://github.com/elk-zone/elk-native/releases/download/v0.1.1/Elk_0.1.1_windows_x86_64.msi.zip",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2dQZnNsUEtOdmtoc05WaFZoNWoyN2RKM2Y1eVB6aGpNU2RoSmxSc2hQMWRodlUycUR2Vlc0amZOa1EySUxrbm5JY05OTThwcDJsaTByNzhKUExnWlFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MDQwODk4CWZpbGU6RWxrXzAuMS4xX3g2NF9lbi1VUy5tc2kuemlwClJTRW1rbk1TQWZzUkljM01QYm4wWVBiWU1uZ0RCcW5vcUhZWGFacmlyZlJtbTFwcHl4MkZ2QTdBVURRVC9wMVI1cGpqam4xTFdQWXhuQ3VrQ3VTa0NBPT0K"
+    }
+  }
+}
