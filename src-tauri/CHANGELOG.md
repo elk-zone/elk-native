@@ -1,5 +1,12 @@
 # Changelog
 
+## \[0.1.3]
+
+- test
+  - [fe60e97](https://github.com/elk-zone/elk-native/commit/fe60e9733e15e0f4375d510c7a86e3553be4a9a9) wip on 2023-01-17
+  - [6ca37d2](https://github.com/elk-zone/elk-native/commit/6ca37d2cff03093cb45022cf851542328d081dff) publish new versions ([#30](https://github.com/elk-zone/elk-native/pull/30)) on 2023-01-17
+  - [765f6f2](https://github.com/elk-zone/elk-native/commit/765f6f2790975f1e4909322c80c707479350c6cc) Create test.md on 2023-01-18
+
 ## \[0.1.2]
 
 - test
