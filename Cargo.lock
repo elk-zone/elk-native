@@ -2749,7 +2749,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-log"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/tauri-plugin-log?branch=dev#b58475bbc410fa78eb69276c62d0b64c91c07914"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#c9d15db48e458d7e8497674d549d86dfe13bf79e"
 dependencies = [
  "byte-unit",
  "fern",
@@ -2763,8 +2763,8 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-store"
-version = "0.0.0"
-source = "git+https://github.com/tauri-apps/tauri-plugin-store?branch=dev#9bd993aa67766596638bbfd91e79a1bf8f632014"
+version = "0.1.0"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#c9d15db48e458d7e8497674d549d86dfe13bf79e"
 dependencies = [
  "log",
  "serde",
