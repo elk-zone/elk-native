@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changelog: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkg.changelog }}
-      published: ${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}
+      published: "${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}"
       # published: ${{ steps.covector.outputs.successfulPublish }}
       version: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkgFile.version }}
 
@@ -55,7 +55,7 @@ jobs:
   create-and-upload-assets:
     runs-on: ${{ matrix.config.os }}
     needs: [version-or-publish]
-    if: needs.version-or-publish.outputs.published
+    if: needs.version-or-publish.outputs.published == 'true'
     timeout-minutes: 30
     strategy:
       fail-fast: false
