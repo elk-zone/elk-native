@@ -36,8 +36,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           command: 'version-or-publish'
-          createRelease: true
-          draftRelease: true
       - run: |
           echo "${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}"
           echo "${{ steps.covector.outputs.successfulPublish }}"
@@ -197,13 +195,14 @@ jobs:
           git config user.email github-actions@github.com
           git add latest-*.json
           git commit -am "Update latest.json"
-          git push origin HEAD:main --tags -f
+          git push origin HEAD:main
       - name: 'create release'
         uses: softprops/action-gh-release@master
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
           tag_name: elk-native-v${{ needs.version-or-publish.outputs.version }}
-          draft: false
+          name: Elk Native v${{ needs.version-or-publish.outputs.version }}
+          body: ${{ needs.version-or-publish.outputs.changelog }}
           files: ./artifacts/**/*
       
