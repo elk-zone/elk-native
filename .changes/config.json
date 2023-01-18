@@ -7,7 +7,10 @@
 			"version": true,
 			"postversion": "cargo tree |> /dev/null",
 			"getPublishedVersion": "git log elk-native-v${ pkgFile.version } -1 --pretty=%Cgreen${ pkgFile.version } || echo \"not published yet\"",
-			"publish": "echo \"build assets have already been uploaded to release\""
+			"publish": [
+				"git tag elk-native-v${ pkgFile.version } -f",
+				"git push --tags -f"
+			]
 		}
 	}
 }

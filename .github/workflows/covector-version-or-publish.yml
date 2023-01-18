@@ -197,13 +197,13 @@ jobs:
           git config user.email github-actions@github.com
           git add latest-*.json
           git commit -am "Update latest.json"
-          git push origin HEAD:main
+          git push origin HEAD:main --tags -f
       - name: 'create release'
         uses: softprops/action-gh-release@master
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
-          tag_name: v${{ needs.version-or-publish.outputs.version }}
+          tag_name: elk-native-v${{ needs.version-or-publish.outputs.version }}
           draft: false
           files: ./artifacts/**/*
       
