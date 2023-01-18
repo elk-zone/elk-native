@@ -8,9 +8,12 @@ async function main() {
   const version = process.argv[2]
   const channel = process.argv[3] // either nightly or stable
 
+  console.log(process.env.CHANGELOG);
+
   const obj = {
     name: version,
-    notes: await readFile('RELEASE_NOTES.txt', 'utf-8'),
+    notes: process.env.CHANGELOG,
+    // notes: (await readFile('RELEASE_NOTES.txt', 'utf-8')).replace('# Version Updates\n\nMerging this PR will release new versions of the following packages based on your change files.\n\n\n\n\n# elk-native\n\n', ''),
     pub_date: new Date().toISOString(),
     platforms: {
       'darwin-aarch64': await getPlatform(version, 'aarch64', [
