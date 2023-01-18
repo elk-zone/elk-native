@@ -38,6 +38,10 @@ jobs:
           command: 'version-or-publish'
           createRelease: true
           draftRelease: true
+      - run: |
+          echo "${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}"
+          echo "${{ steps.covector.outputs.successfulPublish }}"
+          echo "${{ steps.covector.outputs.published-elk-native }}"
       - name: Create Pull Request With Versions Bumped
         id: cpr
         uses: tauri-apps/create-pull-request@v3
