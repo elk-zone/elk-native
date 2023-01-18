@@ -48,6 +48,7 @@
         "timestampUrl": ""
       }
     },
+    "macOSPrivateApi": true,
     "security": {
       "csp": {
         "default-src": "'none'",
