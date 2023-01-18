@@ -38,7 +38,7 @@ jobs:
           createRelease: true
           draftRelease: true
       - run: |
-          echo "${{ steps.covector.outputs.templatePipe }}"
+          echo "${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkgFile.version }}"
       - name: Create Pull Request With Versions Bumped
         id: cpr
         uses: tauri-apps/create-pull-request@v3
