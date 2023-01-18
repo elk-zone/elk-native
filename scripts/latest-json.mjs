@@ -12,7 +12,7 @@ async function main() {
 
   const obj = {
     name: version,
-    notes: JSON.parse(process.env.CHANGELOG || '{}')?.['elk-native']?.pipe?.pkg?.changelog || '',
+    notes: process.env.CHANGELOG,
     // notes: (await readFile('RELEASE_NOTES.txt', 'utf-8')).replace('# Version Updates\n\nMerging this PR will release new versions of the following packages based on your change files.\n\n\n\n\n# elk-native\n\n', ''),
     pub_date: new Date().toISOString(),
     platforms: {
