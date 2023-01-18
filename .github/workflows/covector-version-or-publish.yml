@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changelog: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkg.changelog }}
-      # published: ${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}
-      version: ${{ steps.covector.outputs.version-elk-native }}
+      published: ${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}
+      version: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkgFile.version }}
 
     steps:
       - uses: actions/checkout@v2
@@ -37,8 +37,6 @@ jobs:
           command: 'version-or-publish'
           createRelease: true
           draftRelease: true
-      - run: |
-          echo "${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkgFile.version }}"
       - name: Create Pull Request With Versions Bumped
         id: cpr
         uses: tauri-apps/create-pull-request@v3
