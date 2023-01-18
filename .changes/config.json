@@ -6,7 +6,7 @@
 			"path": "./src-tauri/Cargo.toml",
 			"version": true,
 			"postversion": "cargo tree |> /dev/null",
-			"getPublishedVersion": "git log v${ pkgFile.version } -1 --pretty=%Cgreen${ pkgFile.version } || echo \"not published yet\"",
+			"getPublishedVersion": "git log elk-native-v${ pkgFile.version } -1 --pretty=%Cgreen${ pkgFile.version } || echo \"not published yet\"",
 			"publish": "echo \"build assets have already been uploaded to release\""
 		}
 	}
