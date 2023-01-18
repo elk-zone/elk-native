@@ -1,5 +1,10 @@
 # Changelog
 
+## \[0.1.2]
+
+- test
+  - [fe60e97](https://github.com/elk-zone/elk-native/commit/fe60e9733e15e0f4375d510c7a86e3553be4a9a9) wip on 2023-01-17
+
 ## \[0.1.1]
 
 - Fixed opening links in the browser
