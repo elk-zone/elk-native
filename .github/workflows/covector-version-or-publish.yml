@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changelog: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkg.changelog }}
-      # published: ${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}
-      published: ${{ steps.covector.outputs.successfulPublish }}
+      published: ${{ contains(steps.covector.outputs.packagesPublished, 'elk-native') }}
+      # published: ${{ steps.covector.outputs.successfulPublish }}
       version: ${{ fromJSON(steps.covector.outputs.templatePipe).elk-native.pipe.pkgFile.version }}
 
     steps:
