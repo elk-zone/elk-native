@@ -199,7 +199,7 @@ jobs:
           mv "artifacts/x86_64/deb/elk_${{ needs.version-or-publish.outputs.version }}_amd64.deb" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.deb"
 
       - name: Generate latest.json file
-        run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} nightly
+        run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} stable
         env:
           CHANGELOG: '${{ needs.version-or-publish.outputs.changelog }}'
 

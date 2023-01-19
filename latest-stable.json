@@ -1,23 +1,23 @@
 {
-  "name": "0.1.1",
-  "notes": "# Version Updates\n\nMerging this PR will release new versions of the following packages based on your change files.\n\n\n\n\n# elk-native\n\n## [0.1.1]\n- Fixed opening links in the browser\n  - [068037a](https://github.com/elk-zone/elk-native/commit/068037a4913e56619435c11fd1a791e525742b78) fix: Fixed opening links in the browser ([#25](https://github.com/elk-zone/elk-native/pull/25)) on 2023-01-17\n\n",
-  "pub_date": "2023-01-17T18:44:55.478Z",
+  "name": "0.2.0",
+  "notes": "## \\[0.2.0]\n\n- Enable window draging by the title bar\n  - [2eb4a8a](https://github.com/elk-zone/elk-native/commit/2eb4a8ae77fb5c76808ea0f8d2bdaaab81efa924) fix: Enable window draging by the title bar ([#29](https://github.com/elk-zone/elk-native/pull/29)) on 2023-01-19\n- Update elk to v0.6.0. This includes various improvements, support for more languages, and more!\n  - [b0a9483](https://github.com/elk-zone/elk-native/commit/b0a9483afaaf789147ab77d2571e4f276ac291f8) update elk to v0.6.0 ([#40](https://github.com/elk-zone/elk-native/pull/40)) on 2023-01-19\n- Update Tauri from v1.2.3 to v1.2.4\n  - [513a1c2](https://github.com/elk-zone/elk-native/commit/513a1c2808941b20edc6d1b220ed15a9682eb389) Update Rust crate tauri to 1.2.4 ([#36](https://github.com/elk-zone/elk-native/pull/36)) on 2023-01-19\n- Use correct configuration and icon for stable releases.\n  - [b5e5446](https://github.com/elk-zone/elk-native/commit/b5e544655c798405827babcf8aecf7e3d0ddc03e) fix: use correct configuration for stable releases ([#38](https://github.com/elk-zone/elk-native/pull/38)) on 2023-01-19\n",
+  "pub_date": "2023-01-19T14:51:34.351Z",
   "platforms": {
     "darwin-aarch64": {
-      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.1.1/Elk_0.1.1_macos_aarch64.app.tar.gz",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV3NKMTBNK2RSbEVIU0VWL3kvbE9xNlJqRk44L2dJNGUxWDhLVnVzaExYL2tUY1gyUzh6VU05ajd3U0o1NGVwZ3BXRlY5Rzd2NEVsb04zMTh3ZjB1cVE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTgwNzYxCWZpbGU6RWxrLmFwcC50YXIuZ3oKbmM0UGJ0cjRjZ0ZOb3ppZ3ZnRk54dE5RWnRSQ0VBN3dGb1ZYQXdSSXdLMEtFMVJNZDV2TnpGYXRmRzlQODVGSlB1LzJVM29ndS8wSGYwQnBQdHBPQmc9PQo="
+      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.2.0/Elk_0.2.0_macos_aarch64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV3JxT1lrSWtzNE5tZjZudDMvL3QwcmQ5WXE3ZlZMR1JJb3d1Z3hJR1prVnZpUFlIMlloaDZSVlk4KzRFUy9pMUMxcXNlNGdOajhMNCszUE1LY0FGL2dnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MTM4NjA4CWZpbGU6RWxrLmFwcC50YXIuZ3oKbGt0WERZVlhoTkl4MXUzYXBIbStlUkhvYmZSUWhhZUUvRFExSTJRa1JtM2F2NUcrRW1rcWdpSEZSS0owZm5iNGkvYU9lSW9IM1p1MCtnTERnR2syQnc9PQo="
     },
     "darwin-x86_64": {
-      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.1.1/Elk_0.1.1_macos_x86_64.app.tar.gz",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV29YM3hIbkNJbFAzVUQ2ZGlmc2UvZGZFdWFYU0tWcExqUFMwcXdmcm1tcjZVaWRud3BuTC9XMm9YNGMxN21wQnJuSDRteUlFSWJFaDRsYWZGQnZOa1FNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTgwNzIxCWZpbGU6RWxrLmFwcC50YXIuZ3oKR21hTzI0QkJBTXpMdS83c3ZsY1NlOVV5YWZTZ3M4b2wrQ0h6ditScitGa1dYdDFobHlyV0k4bmpwZW5nbktPZmdzYnFtd295bFhHUDFLYnFIUW9VQUE9PQo="
+      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.2.0/Elk_0.2.0_macos_x86_64.app.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2laN1NrS0F0ek01R3NPZ3k5NU5NTktHcVlMcUl4OVVhYy9uWXZFcG9ydDJlQ0tXVE52RkwwSkxKYjFTalFQdkxpN25MR3QwQll5elVObjBIdERtT0FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MTM4NjA4CWZpbGU6RWxrLmFwcC50YXIuZ3oKVEl0MmsvT29zMEtEdisvOEQxREk0THZ6dzlBQkJvOURSZldtcnMvTm9HTThxb3NuMFZDMm9XajFlZmloU3lRKy9mUlJackFQZG5kRGszckhNNVVTQ1E9PQo="
     },
     "linux-x86_64": {
-      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.1.1/Elk_0.1.1_linux_x86_64.AppImage.tar.gz",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV25GWW9kYVlhaXlLdUtNNTdlN1hSSEFiK29qNWdNcnR5ajYwOHhreTdnakpheHcvWENaMDcyenRvOXJvdjJQaVF6TldJOEhHcDIrdnZMSEF1MmtTdXdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTgwNjA0CWZpbGU6ZWxrXzAuMS4xX2FtZDY0LkFwcEltYWdlLnRhci5negpPankwc0hzNUc3M0RJb05wRGUvUGtoOU1ZalFkTmpxM2NuQVJrS2J0Q2hHY0Y4TmNNcWE4Snd6RXNHOE84SUphREQwY0pMdTFYT2lOdFhuYVovUCtBUT09Cg=="
+      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.2.0/Elk_0.2.0_linux_x86_64.AppImage.tar.gz",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2tnUnFzd2pKSjhuS1MvZmlTWUwvUmpuOENxOWw4Ti9kZmJJbTlyaTFZQitGRTFnU0J5YXNKOFhNRHgzMVlrdFpNM0NhOWpDYlc0dUowTFVoMVhuRVFRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MTM4MzM4CWZpbGU6ZWxrXzAuMi4wX2FtZDY0LkFwcEltYWdlLnRhci5negp3SStEaE9OVVM0OW4rQ0F2c2Jsd21CRUNtQkxiNFZyVXVpbllRTzd4MnFaOGkyOFptaVV2ZjBveG9GZ1plZFFrSUlNdURaaG43a2pKZUkvcWlKOVBEQT09Cg=="
     },
     "windows-x86_64": {
-      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.1.1/Elk_0.1.1_windows_x86_64.msi.zip",
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2pBclRNazd6SGVub2IrN3RKL1VHTC91UG9HN1VBU2VTYnFrTFpYNUlRZHhrOU84SmJnWEZaRCtFZ2xrMkZ2MXkxNkhGeXZTWGUxa3RicUI0S1hNOGdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjczOTgxMDUxCWZpbGU6RWxrXzAuMS4xX3g2NF9lbi1VUy5tc2kuemlwCkpnQnd5UWZTM1Z5SklZZG9sWkFaS1FqYms4QU5xc1pvalZkTWdhVzYrMy9QSmNOY1FDUnJvY3JOR0VDbDFVaGw5QVZ6a0hJZXlpaEpXVXE2Wkptc0RnPT0K"
+      "url": "https://github.com/elk-zone/elk-native/releases/download/elk-native-v0.2.0/Elk_0.2.0_windows_x86_64.msi.zip",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUUlBjaENjUGFYV2xzZDQzQjRoZXJ1WGp5dmo0WVk2Qk9LZHhmT0gyM0hCdE9UM3plOEFxd1lXcDJNK1ZGaFBENjRoT2gwQllHYnhmYURJMi91K25iekIxN3NtMktyZFFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc0MTM4MzgxCWZpbGU6RWxrXzAuMi4wX3g2NF9lbi1VUy5tc2kuemlwCk5zR29OUVJpQ0V0V3NZRWhrdUdMckxDOFVZdG9ZeEV6VGxaUk85V2RZYndjMHR0cThBOC9ISlFsc050Q3Zsay9YOU1HcmxRMFoxeGgxeDI2YUR3UkRRPT0K"
     }
   }
 }
