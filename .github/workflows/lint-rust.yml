@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p elk/.output/public
 
-      - uses: uses: actions-rs/cargo@v1
+      - uses: actions-rs/cargo@v1
         with:
           command: clippy
           args: --manifest-path=Cargo.toml --all-targets --all-features -- -D warnings
