@@ -50,17 +50,12 @@ jobs:
           submodules: true
 
       - name: "Setup Rust"
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          default: true
-          override: true
-          profile: minimal
-          toolchain: stable
-          target: ${{ matrix.config.rust_target }}
-
+            targets: ${{ matrix.config.rust_target }}
       - uses: Swatinem/rust-cache@v2
         with:
-          key: ${{ matrix.config.rust_target }}
+            key: ${{ matrix.config.rust_target }}
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
