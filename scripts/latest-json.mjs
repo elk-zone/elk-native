@@ -40,7 +40,7 @@ async function getPlatform(version, arch, exts) {
   const [artifact, signature] = await glob(`./**/*${arch}.{${exts.join(',')}}`, { cwd: join(process.cwd(), "./artifacts") })
 
   return {
-    url: `${BASE_URL}/v${version}/${artifact}`,
+    url: `${BASE_URL}/elk-native-v${version}/${artifact}`,
     signature: await readFile(join(process.cwd(), './artifacts', signature), 'utf-8')
   }
 }
