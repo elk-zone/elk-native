@@ -7,8 +7,8 @@ use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
 #[cfg(debug_assertions)]
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
-use tauri_plugin_log::{LogTarget, LoggerBuilder};
-use tauri_plugin_store::PluginBuilder;
+use tauri_plugin_log::{LogTarget, Builder as LogPluginBuilder};
+use tauri_plugin_store::Builder as StorePluginBuilder;
 
 fn main() {
     let log_plugin = {
@@ -22,7 +22,7 @@ fn main() {
             .map(|ref filter| FilterBuilder::new().parse(filter).build().filter())
             .unwrap_or(LevelFilter::Debug);
 
-        let builder = LoggerBuilder::new().targets(targets).level(filter);
+        let builder = LogPluginBuilder::new().targets(targets).level(filter);
 
         #[cfg(debug_assertions)]
         let builder = builder.with_colors(ColoredLevelConfig::default());
@@ -32,7 +32,7 @@ fn main() {
 
     tauri::Builder::default()
         .plugin(log_plugin)
-        .plugin(PluginBuilder::default().build())
+        .plugin(StorePluginBuilder::default().build())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
