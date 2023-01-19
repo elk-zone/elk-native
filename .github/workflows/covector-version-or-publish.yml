@@ -132,13 +132,13 @@ jobs:
         run: |
           pwd
           mkdir target/${{ matrix.config.rust_target }}/release/bundle/bin -p
-          cp ./target/${{ matrix.config.rust_target }}/release/elk ./target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.arch }}
+          cp ./target/${{ matrix.config.rust_target }}/release/elk ./target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.os }}_${{ matrix.config.arch }}
       # Upload binaries,
       - uses: actions/upload-artifact@v3
         if: "matrix.config.os == 'ubuntu-latest'"
         with:
           name: artifacts-${{ matrix.config.arch }}
-          path: "target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.arch }}"
+          path: "target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.os }}_${{ matrix.config.arch }}"
 
   publish:
     needs: [version-or-publish, create-and-upload-assets]
