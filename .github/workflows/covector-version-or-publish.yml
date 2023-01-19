@@ -124,7 +124,7 @@ jobs:
           TAURI_PRIVATE_KEY: '${{ secrets.TAURI_PRIVATE_KEY }}'
         with:
           target: ${{ matrix.config.rust_target }}
-          configPath: stable.tauri.conf.json
+          configPath: src-tauri/stable.tauri.conf.json
 
       - uses: actions/upload-artifact@v3
         with:
