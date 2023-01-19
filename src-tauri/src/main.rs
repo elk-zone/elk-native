@@ -7,7 +7,7 @@ use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
 #[cfg(debug_assertions)]
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
-use tauri_plugin_log::{LogTarget, Builder as LogPluginBuilder};
+use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
 use tauri_plugin_store::Builder as StorePluginBuilder;
 
 fn main() {
