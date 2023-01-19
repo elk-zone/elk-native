@@ -130,6 +130,18 @@ jobs:
         with:
           name: artifacts-${{ matrix.config.arch }}
           path: "${{ join(fromJSON(steps.tauri_build.outputs.artifacts), '\n') }}"
+      - name: Rename elk binary to represent it's architecture and os
+        if: "matrix.config.os == 'ubuntu-latest'"
+        run: |
+          pwd
+          mkdir target/${{ matrix.config.rust_target }}/release/bundle/bin -p
+          cp ./target/${{ matrix.config.rust_target }}/release/elk ./target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.os }}_${{ matrix.config.arch }}
+      # Upload binaries,
+      - uses: actions/upload-artifact@v3
+        if: "matrix.config.os == 'ubuntu-latest'"
+        with:
+          name: artifacts-${{ matrix.config.arch }}
+          path: "target/${{ matrix.config.rust_target }}/release/bundle/bin/Elk_${{ needs.version-or-publish.outputs.version }}_${{ matrix.config.os }}_${{ matrix.config.arch }}"
 
   publish:
     needs: [version-or-publish, create-and-upload-assets]
@@ -180,11 +192,12 @@ jobs:
           mv "artifacts/x86_64/Elk_${{ needs.version-or-publish.outputs.version }}_x64_en-US.msi" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi"
           mv "artifacts/x86_64/Elk_${{ needs.version-or-publish.outputs.version }}_x64_en-US.msi.zip" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi.zip"
           mv "artifacts/x86_64/Elk_${{ needs.version-or-publish.outputs.version }}_x64_en-US.msi.zip.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_windows_x86_64.msi.zip.sig"
-          
+
           mv "artifacts/x86_64/appimage/elk_${{ needs.version-or-publish.outputs.version }}_amd64.AppImage" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage"
           mv "artifacts/x86_64/appimage/elk_${{ needs.version-or-publish.outputs.version }}_amd64.AppImage.tar.gz" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz"
           mv "artifacts/x86_64/appimage/elk_${{ needs.version-or-publish.outputs.version }}_amd64.AppImage.tar.gz.sig" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.AppImage.tar.gz.sig"
           mv "artifacts/x86_64/deb/elk_${{ needs.version-or-publish.outputs.version }}_amd64.deb" "./artifacts/Elk_${{ needs.version-or-publish.outputs.version }}_linux_x86_64.deb"
+
       - name: Generate latest.json file
         run: node scripts/latest-json.mjs ${{ needs.version-or-publish.outputs.version }} nightly
         env:
@@ -206,4 +219,4 @@ jobs:
           name: Elk Native v${{ needs.version-or-publish.outputs.version }}
           body: ${{ needs.version-or-publish.outputs.changelog }}
           files: ./artifacts/**/*
-      
+
