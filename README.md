@@ -8,11 +8,9 @@
 </p>
 <br/>
 
-Native version of Elk, a nimble Mastodon web client.
+Native version of [Elk](https://github.com/elk-zone/elk), a nimble Mastodon web client.
 
-Elk Native is even more early alpha than the web version, but we would love your feedback and contributions.
-
-The web client code lives at https://github.com/elk-zone/elk, a repository that will be open-sourced once we are ready to promote the app widely. If you would like to help us with testing, feedback, or contributing, join our [discord](https://chat.elk.zone) and get involved.
+Elk Native is even more early alpha than the web version, but we would love your feedback and contributions. If you would like to help us with testing, feedback, or contributing, join our [discord](https://chat.elk.zone) and get involved.
 
 ![Screenshot of the app, showing the federated timeline home](./Screenshot-light.png#gh-light-mode-only)
 ![Screenshot of the app, showing the federated timeline home](./Screenshot-dark.png#gh-dark-mode-only)
