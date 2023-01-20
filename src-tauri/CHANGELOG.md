@@ -1,5 +1,12 @@
 # Changelog
 
+## \[0.2.1]
+
+- Update elk to v0.6.1
+  - [b0a9483](https://github.com/elk-zone/elk-native/commit/b0a9483afaaf789147ab77d2571e4f276ac291f8) update elk to v0.6.0 ([#40](https://github.com/elk-zone/elk-native/pull/40)) on 2023-01-19
+  - [e458335](https://github.com/elk-zone/elk-native/commit/e4583357c1274338069184e7d1e4ebea76f4f3f5) \[create-pull-request] automated change ([#39](https://github.com/elk-zone/elk-native/pull/39)) on 2023-01-19
+  - [27c7a11](https://github.com/elk-zone/elk-native/commit/27c7a11e019062838630de8d81dbe07fd3964a78) Elk v0.6.1 ([#47](https://github.com/elk-zone/elk-native/pull/47)) on 2023-01-20
+
 ## \[0.2.0]
 
 - Enable window draging by the title bar
