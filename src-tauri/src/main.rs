@@ -3,8 +3,10 @@
     windows_subsystem = "windows"
 )]
 
+mod system_tray;
 mod window_state;
 
+use crate::system_tray::{create_tray, system_tray_event_handler};
 use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
 use tauri::Menu;
@@ -34,11 +36,20 @@ fn main() {
         builder.build()
     };
 
+    let system_tray = create_tray();
+
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
         .plugin(WindowStateBuilder::default().build())
         .menu(Menu::os_default("Elk"))
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .system_tray(system_tray)
+        .on_system_tray_event(system_tray_event_handler)
+        .build(tauri::generate_context!())
+        .expect("error while building tauri application")
+        .run(|_app_handle, event| {
+            if let tauri::RunEvent::ExitRequested { api, .. } = event {
+                api.prevent_exit();
+            }
+        });
 }
