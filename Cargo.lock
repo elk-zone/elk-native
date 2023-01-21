@@ -42,6 +42,7 @@ checksum = "2cb2f989d18dd141ab8ae82f64d1a8cdd37e0840f73a406896cf5e99502fab61"
 name = "app"
 version = "0.2.1"
 dependencies = [
+ "bincode",
  "env_logger",
  "log",
  "serde",
@@ -50,7 +51,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-log",
  "tauri-plugin-store",
- "tauri-plugin-window-state",
+ "thiserror",
 ]
 
 [[package]]
@@ -2776,19 +2777,6 @@ name = "tauri-plugin-store"
 version = "0.1.0"
 source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#4ff7843581aced66b2c4e21a64e514e255b41cc4"
 dependencies = [
- "log",
- "serde",
- "serde_json",
- "tauri",
- "thiserror",
-]
-
-[[package]]
-name = "tauri-plugin-window-state"
-version = "0.1.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#4ff7843581aced66b2c4e21a64e514e255b41cc4"
-dependencies = [
- "bincode",
  "log",
  "serde",
  "serde_json",
