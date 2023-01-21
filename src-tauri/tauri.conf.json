@@ -15,7 +15,9 @@
         "open": true
       },
       "window": {
-        "startDragging": true
+        "startDragging": true,
+        "maximize": true,
+        "unmaximize": true
       }
     },
     "bundle": {
