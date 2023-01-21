@@ -9,6 +9,7 @@ use log::LevelFilter;
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
 use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
 use tauri_plugin_store::Builder as StorePluginBuilder;
+use tauri_plugin_window_state::Builder as WindowStateBuilder;
 
 fn main() {
     let log_plugin = {
@@ -33,6 +34,7 @@ fn main() {
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
+        .plugin(WindowStateBuilder::default().build())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

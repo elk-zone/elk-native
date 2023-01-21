@@ -18,6 +18,7 @@ serde = { version = "1.0", features = [ "derive" ] }
 tauri = { version = "1.2.4", features = ["shell-open", "updater", "window-start-dragging"] }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev", features = [ "colored" ] }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
+tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 log = "0.4.17"
 env_logger = "0.10.0"
 
