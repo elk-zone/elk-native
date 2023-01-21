@@ -2,4 +2,4 @@
 "elk-native": minor
 ---
 
-Improved layout for desktop Operating Systems
+Improved layout for Desktop Operating Systems.
