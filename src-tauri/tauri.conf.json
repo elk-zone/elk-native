@@ -74,6 +74,8 @@
         "resizable": true,
         "title": "Elk",
         "width": 1000,
+        "minWidth": 640,
+        "minHeight": 300,
         "titleBarStyle": "Overlay",
         "hiddenTitle": true
       }
