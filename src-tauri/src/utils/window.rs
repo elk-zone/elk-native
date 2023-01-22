@@ -15,8 +15,8 @@ impl<'a> WindowWithConfig<'a> for WindowBuilder<'a, Wry> {
 
         #[cfg(target_os = "macos")]
         {
-            builder
-                .title_bar_style(config.title_bar_style)
+            builder = builder
+                .title_bar_style(config.title_bar_style.clone())
                 .hidden_title(config.hidden_title);
         }
 
