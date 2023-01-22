@@ -1,6 +1,7 @@
+use crate::utils::window::WindowWithConfig;
 use tauri::{
     AppHandle, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, WindowBuilder,
-    Wry,
+    WindowUrl, Wry,
 };
 
 pub(crate) fn create_tray() -> SystemTray {
@@ -19,10 +20,20 @@ pub(crate) fn system_tray_event_handler(app: &AppHandle<Wry>, event: SystemTrayE
             }
             "show_window" => {
                 let window = app.get_window("main").unwrap_or_else(|| {
-                    WindowBuilder::new(app, "main", tauri::WindowUrl::App("/".into()))
-                        .title("Elk")
-                        .build()
-                        .expect("Could not create new main window")
+                    let tauri_config = app.config();
+                    let config = tauri_config
+                        .tauri
+                        .windows
+                        .iter()
+                        .find(|conf| conf.label == "main");
+
+                    let window = if let Some(config) = config {
+                        WindowBuilder::with_config(app, config)
+                    } else {
+                        WindowBuilder::new(app, "main", WindowUrl::App("/".into()))
+                    };
+
+                    window.build().expect("Could not create new main window")
                 });
 
                 if !window.is_visible().unwrap_or(true) {

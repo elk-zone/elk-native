@@ -4,6 +4,7 @@
 )]
 
 mod system_tray;
+mod utils;
 mod window_state;
 
 use crate::system_tray::{create_tray, system_tray_event_handler};
