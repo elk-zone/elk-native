@@ -3,8 +3,6 @@
     windows_subsystem = "windows"
 )]
 
-mod window_state;
-
 use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
 use tauri::Menu;
@@ -12,7 +10,7 @@ use tauri::Menu;
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
 use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
 use tauri_plugin_store::Builder as StorePluginBuilder;
-use window_state::Builder as WindowStateBuilder;
+use tauri_plugin_window_state::{Builder as WindowStateBuilder, StateFlags};
 
 fn main() {
     let log_plugin = {
@@ -37,7 +35,7 @@ fn main() {
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
-        .plugin(WindowStateBuilder::default().build())
+        .plugin(WindowStateBuilder::default().with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED).build())
         .menu(Menu::os_default("Elk"))
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
