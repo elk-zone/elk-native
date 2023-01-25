@@ -13,7 +13,7 @@ use tauri::{Manager, Menu, Wry};
 #[cfg(debug_assertions)]
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
 use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
-use tauri_plugin_store::{Builder as StorePluginBuilder, StoreCollection, with_store};
+use tauri_plugin_store::{with_store, Builder as StorePluginBuilder, StoreCollection};
 use tauri_plugin_window_state::{Builder as WindowStateBuilder, StateFlags};
 
 fn main() {
@@ -41,7 +41,11 @@ fn main() {
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
-        .plugin(WindowStateBuilder::default().with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED).build())
+        .plugin(
+            WindowStateBuilder::default()
+                .with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED)
+                .build(),
+        )
         .menu(Menu::os_default("Elk"))
         .system_tray(system_tray)
         .on_system_tray_event(system_tray_event_handler)
@@ -65,7 +69,8 @@ fn main() {
                     }
 
                     Ok(())
-                }).unwrap();
+                })
+                .unwrap();
             }
         });
 }
