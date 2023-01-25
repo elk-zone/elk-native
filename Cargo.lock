@@ -40,9 +40,8 @@ checksum = "2cb2f989d18dd141ab8ae82f64d1a8cdd37e0840f73a406896cf5e99502fab61"
 
 [[package]]
 name = "app"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
- "bincode",
  "env_logger",
  "log",
  "serde",
@@ -51,7 +50,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-log",
  "tauri-plugin-store",
- "thiserror",
+ "tauri-plugin-window-state",
 ]
 
 [[package]]
@@ -2813,6 +2812,20 @@ name = "tauri-plugin-store"
 version = "0.1.0"
 source = "git+https://github.com/tauri-apps/plugins-workspace?branch=rust-accessible-store#f1ad29c8820870ebbcfd77013f11f4db88e4c1a8"
 dependencies = [
+ "log",
+ "serde",
+ "serde_json",
+ "tauri",
+ "thiserror",
+]
+
+[[package]]
+name = "tauri-plugin-window-state"
+version = "0.1.0"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#766021a6994307102da44f8a822fc5cf2e94319b"
+dependencies = [
+ "bincode",
+ "bitflags",
  "log",
  "serde",
  "serde_json",

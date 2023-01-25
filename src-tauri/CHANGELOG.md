@@ -1,5 +1,22 @@
 # Changelog
 
+## \[0.3.0]
+
+- Elk Native now supports standard keyboard shortcurts like Copy, Paste, Cut, and Fullscreen.
+  - [affbb93](https://github.com/elk-zone/elk-native/commit/affbb93bd2edcd34f01b909bfff323086b670e17) fix: standard keyboard shortcuts ([#57](https://github.com/elk-zone/elk-native/pull/57)) on 2023-01-21
+- Fix rendering of the Emoji Picker to be as beautiful as the web version.
+  - [a72bf6d](https://github.com/elk-zone/elk-native/commit/a72bf6d00309c82c296f5ef934650cb4ad8aaaaf) Create fix-emoji-picker-styles.md on 2023-01-24
+- You can now double-click the titlebar on macOS to maximize or restore the window.
+  - [5d04868](https://github.com/elk-zone/elk-native/commit/5d04868620f2e24ffd38533ef2e4bbcddc939351) fix(macOS): enable titlebar double-click minimize and restore ([#54](https://github.com/elk-zone/elk-native/pull/54)) on 2023-01-21
+- Update elk to v0.6.2
+  - [b0a9483](https://github.com/elk-zone/elk-native/commit/b0a9483afaaf789147ab77d2571e4f276ac291f8) update elk to v0.6.0 ([#40](https://github.com/elk-zone/elk-native/pull/40)) on 2023-01-19
+  - [e458335](https://github.com/elk-zone/elk-native/commit/e4583357c1274338069184e7d1e4ebea76f4f3f5) \[create-pull-request] automated change ([#39](https://github.com/elk-zone/elk-native/pull/39)) on 2023-01-19
+  - [27c7a11](https://github.com/elk-zone/elk-native/commit/27c7a11e019062838630de8d81dbe07fd3964a78) Elk v0.6.1 ([#47](https://github.com/elk-zone/elk-native/pull/47)) on 2023-01-20
+  - [da72e54](https://github.com/elk-zone/elk-native/commit/da72e54d7da87aed12da2412f96edf1966beadb4) \[create-pull-request] automated change ([#48](https://github.com/elk-zone/elk-native/pull/48)) on 2023-01-20
+  - [295ba3c](https://github.com/elk-zone/elk-native/commit/295ba3c41844ce2354186f6add3876e98e2adc25) Elk v0.6.2 ([#60](https://github.com/elk-zone/elk-native/pull/60)) on 2023-01-24
+- Elk Native now remembers the window's last position and size and will restore them when reopened.
+  - [c954195](https://github.com/elk-zone/elk-native/commit/c9541952c5674bdf247749d4d02750c4ff57fdb7) feat: remember last window size and position ([#53](https://github.com/elk-zone/elk-native/pull/53)) on 2023-01-21
+
 ## \[0.2.1]
 
 - Update elk to v0.6.1

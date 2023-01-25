@@ -5,7 +5,6 @@
 
 mod system_tray;
 mod utils;
-mod window_state;
 
 use crate::system_tray::{create_tray, system_tray_event_handler};
 use env_logger::filter::Builder as FilterBuilder;
@@ -15,7 +14,7 @@ use tauri::{Manager, Menu, Wry};
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
 use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
 use tauri_plugin_store::{Builder as StorePluginBuilder, StoreCollection, with_store};
-use window_state::Builder as WindowStateBuilder;
+use tauri_plugin_window_state::{Builder as WindowStateBuilder, StateFlags};
 
 fn main() {
     let log_plugin = {
@@ -42,7 +41,7 @@ fn main() {
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
-        .plugin(WindowStateBuilder::default().build())
+        .plugin(WindowStateBuilder::default().with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED).build())
         .menu(Menu::os_default("Elk"))
         .system_tray(system_tray)
         .on_system_tray_event(system_tray_event_handler)
