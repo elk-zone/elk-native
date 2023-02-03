@@ -36,7 +36,11 @@ fn main() {
     tauri::Builder::default()
         .plugin(log_plugin)
         .plugin(StorePluginBuilder::default().build())
-        .plugin(WindowStateBuilder::default().with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED).build())
+        .plugin(
+            WindowStateBuilder::default()
+                .with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED)
+                .build(),
+        )
         .menu(menu::init("Elk"))
         .on_menu_event(menu::handle_menu_event)
         .run(tauri::generate_context!())
