@@ -10,18 +10,12 @@ edition = "2021"
 rust-version = "1.59"
 
 [build-dependencies]
-tauri-build = { version = "1.2.1", features = [ ] }
+tauri-build = { version = "1.2.1", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = [ "derive" ] }
-tauri = { version = "1.2.4", features = [
-  "shell-open",
-  "updater",
-  "window-maximize",
-  "window-start-dragging",
-  "window-unmaximize"
-] }
+tauri = { version = "1.2.4", features = ["shell-open", "updater", "window-maximize", "window-start-dragging", "window-unmaximize"] }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev", features = [ "colored" ] }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
