@@ -4,6 +4,7 @@
 )]
 
 mod system_tray;
+mod menu;
 mod utils;
 
 use crate::system_tray::{create_tray, system_tray_event_handler};
@@ -46,7 +47,8 @@ fn main() {
                 .with_state_flags(StateFlags::SIZE | StateFlags::POSITION | StateFlags::MAXIMIZED)
                 .build(),
         )
-        .menu(Menu::os_default("Elk"))
+        .menu(menu::init("Elk"))
+        .on_menu_event(menu::handle_menu_event)
         .system_tray(system_tray)
         .on_system_tray_event(system_tray_event_handler)
         .build(tauri::generate_context!())

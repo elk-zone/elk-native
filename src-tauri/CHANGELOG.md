@@ -1,5 +1,20 @@
 # Changelog
 
+## \[0.4.0]
+
+- Added menu items to open Privacy Policy and License.
+  - [9232366](https://github.com/elk-zone/elk-native/commit/92323668887a7d5dd16c1a1733f40feb34c7448f) improve menu ([#69](https://github.com/elk-zone/elk-native/pull/69)) on 2023-02-03
+- Update elk to v0.7.4. This includes initial support for Lists, improvements in translations and more.
+  - [b0a9483](https://github.com/elk-zone/elk-native/commit/b0a9483afaaf789147ab77d2571e4f276ac291f8) update elk to v0.6.0 ([#40](https://github.com/elk-zone/elk-native/pull/40)) on 2023-01-19
+  - [e458335](https://github.com/elk-zone/elk-native/commit/e4583357c1274338069184e7d1e4ebea76f4f3f5) \[create-pull-request] automated change ([#39](https://github.com/elk-zone/elk-native/pull/39)) on 2023-01-19
+  - [27c7a11](https://github.com/elk-zone/elk-native/commit/27c7a11e019062838630de8d81dbe07fd3964a78) Elk v0.6.1 ([#47](https://github.com/elk-zone/elk-native/pull/47)) on 2023-01-20
+  - [da72e54](https://github.com/elk-zone/elk-native/commit/da72e54d7da87aed12da2412f96edf1966beadb4) \[create-pull-request] automated change ([#48](https://github.com/elk-zone/elk-native/pull/48)) on 2023-01-20
+  - [295ba3c](https://github.com/elk-zone/elk-native/commit/295ba3c41844ce2354186f6add3876e98e2adc25) Elk v0.6.2 ([#60](https://github.com/elk-zone/elk-native/pull/60)) on 2023-01-24
+  - [9f416cc](https://github.com/elk-zone/elk-native/commit/9f416cc8ca7be1f229ef483c826e853f22b8867b) \[create-pull-request] automated change ([#56](https://github.com/elk-zone/elk-native/pull/56)) on 2023-01-24
+  - [3db979e](https://github.com/elk-zone/elk-native/commit/3db979e1355c9670148bf51956821f6ea19cd3f8) feat: update elk to v0.7.0 ([#67](https://github.com/elk-zone/elk-native/pull/67)) on 2023-02-03
+  - [1766592](https://github.com/elk-zone/elk-native/commit/1766592ae72ea210c5d1c77ffb649abe34b5925f) update elk to v0.7.4 on 2023-02-19
+  - [4823f86](https://github.com/elk-zone/elk-native/commit/4823f86ac2673f21181d4e2c5eb022f579715b7e) feat: update elk to v0.7.4 ([#71](https://github.com/elk-zone/elk-native/pull/71)) on 2023-02-19
+
 ## \[0.3.0]
 
 - Elk Native now supports standard keyboard shortcurts like Copy, Paste, Cut, and Fullscreen.
