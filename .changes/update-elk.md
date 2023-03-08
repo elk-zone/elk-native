@@ -2,4 +2,4 @@
 "elk-native": minor
 ---
 
-Update elk to v0.7.4. This includes initial support for Lists, improvements in translations and more.
+Update elk to v0.7.5. This version adds Data Saving mode, basic keyboard shortcut support, and numerous bugfixes.
