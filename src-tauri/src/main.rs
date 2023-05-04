@@ -3,18 +3,18 @@
     windows_subsystem = "windows"
 )]
 
-mod system_tray;
 mod menu;
+mod system_tray;
 mod utils;
 
 use crate::system_tray::{create_tray, system_tray_event_handler};
 use env_logger::filter::Builder as FilterBuilder;
 use log::LevelFilter;
-use tauri::{Manager, Menu, Wry};
+use tauri::Manager;
 #[cfg(debug_assertions)]
 use tauri_plugin_log::fern::colors::ColoredLevelConfig;
 use tauri_plugin_log::{Builder as LogPluginBuilder, LogTarget};
-use tauri_plugin_store::{with_store, Builder as StorePluginBuilder, StoreCollection};
+use tauri_plugin_store::{with_store, Builder as StorePluginBuilder};
 use tauri_plugin_window_state::{Builder as WindowStateBuilder, StateFlags};
 
 fn main() {
@@ -55,7 +55,7 @@ fn main() {
         .expect("error while building tauri application")
         .run(|app, event| {
             if let tauri::RunEvent::ExitRequested { api, .. } = event {
-                let stores = app.state::<StoreCollection<Wry>>();
+                let stores = app.state();
                 let mut path = app.path_resolver().app_data_dir().unwrap();
                 path.push("settings.json");
 
