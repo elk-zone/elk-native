@@ -12,6 +12,9 @@
     },
     "updater": {
       "endpoints": ["https://raw.githubusercontent.com/elk-zone/elk-native/main/latest-stable.json"]
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.png"
     }
   }
 }

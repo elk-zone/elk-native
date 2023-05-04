@@ -81,6 +81,10 @@
         "titleBarStyle": "Overlay",
         "hiddenTitle": true
       }
-    ]
+    ],
+    "systemTray": {
+      "title": "Elk",
+      "iconPath": "icons-dev/icon.png"
+    }
   }
 }

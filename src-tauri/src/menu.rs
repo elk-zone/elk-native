@@ -32,7 +32,7 @@ pub fn init(app_name: &str) -> Menu {
 }
 
 #[cfg(target_os = "linux")]
-pub fn init(app_name: &str) -> Menu {
+pub fn init(_app_name: &str) -> Menu {
     use tauri::MenuItem;
 
     let file_menu = Menu::new()
