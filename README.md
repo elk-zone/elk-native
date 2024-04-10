@@ -8,6 +8,13 @@
 </p>
 <br/>
 
+<br>
+
+> [!WARNING]
+> Elk Native is no longer maintained. [Elk](https://github.com/elk-zone/elk) can be used a [PWA](https://docs.elk.zone/pwa) instead.
+
+<br>
+
 Native version of [Elk](https://github.com/elk-zone/elk), a nimble Mastodon web client.
 
 Elk Native is even more early alpha than the web version, but we would love your feedback and contributions. If you would like to help us with testing, feedback, or contributing, join our [discord](https://chat.elk.zone) and get involved.
