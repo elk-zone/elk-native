@@ -1,5 +1,9 @@
 # Changelog
 
+## \[0.5.0]
+
+- [`b0a9483`](https://github.com/elk-zone/elk-native/commit/b0a9483afaaf789147ab77d2571e4f276ac291f8)([#40](https://github.com/elk-zone/elk-native/pull/40)) Update elk to [v0.10.1](https://github.com/elk-zone/elk/releases/tag/v0.10.1).
+
 ## \[0.4.0]
 
 - Added menu items to open Privacy Policy and License.
